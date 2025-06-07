@@ -6,6 +6,7 @@ import Header from "../Header";
 import SkipCard from "./SkipCard";
 import SkipListItem from "./SkipListItem";
 import SkipFilters from "./SkipFilters";
+import SkipComparisonTable from "./SkipComparisonTable";
 
 import { useSkips } from "../../hooks/useSkips";
 import { useFavorites } from "../../hooks/useFavorites";
@@ -235,19 +236,13 @@ const SkipSelectionPage = () => {
         )}
 
         {viewMode === "compare" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-2 md:px-0">
-            {filteredSkips.map((skip) => (
-              <SkipCard
-                key={skip.id}
-                skip={skip}
-                isSelected={selectedSkip?.id === skip.id}
-                onSelect={setSelectedSkip}
-                onToggleFavorite={toggleFavorite}
-                isFavorite={favorites.includes(skip.id)}
-                compact={true}
-              />
-            ))}
-          </div>
+          <SkipComparisonTable
+            filteredSkips={filteredSkips}
+            selectedSkip={selectedSkip}
+            onSelect={setSelectedSkip}
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+          />
         )}
 
         {viewMode === "list" && (
